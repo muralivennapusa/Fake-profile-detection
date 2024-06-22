@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Social Media ID Processor</title>
+  <style>
+    .container {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+input[type="text"] {
+  width: 80%;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Social Media ID Processor</h1>
+    <input type="text" id="socialMediaLink" placeholder="Enter social media link">
+    <button onclick="processLink()">Process</button>
+    <div id="output"></div>
+    <br><br><br><br>
+    <button onclick="createTextFile()">Export</button>
+</div>
+  <script>
+    function processLink() {
+    var inputValue = document.getElementById('socialMediaLink').value;
+    
+    // Get the output div
+    var outputDiv = document.getElementById("output");
+    
+    // Get the current content of the output div
+    var currentContent = outputDiv.innerHTML;
+    
+    // Concatenate the new input with the existing content
+    var updatedContent = currentContent + "<br>" + inputValue;
+    
+    // Update the output div with the updated content
+    outputDiv.innerHTML = updatedContent;
+    
+    // Clear the input field
+    document.getElementById("socialMediaLink").value = "";
+    }
+
+    function createTextFile() {
+        // Get the content of the output div
+        var content = document.getElementById("output").innerText;
+        
+        // Create a Blob object
+        var blob = new Blob([content], { type: 'text/plain' });
+        
+        // Create a temporary URL for the Blob object
+        var url = URL.createObjectURL(blob);
+        
+        // Create a link element
+        var link = document.createElement('a');
+        link.href = url;
+        link.download = 'output.txt';
+        
+        // Append the link to the body and click it to trigger download
+        document.body.appendChild(link);
+        link.click();
+        
+        // Remove the link from the body
+        document.body.removeChild(link);
+    }
+  </script>
+</body>
+</html>
