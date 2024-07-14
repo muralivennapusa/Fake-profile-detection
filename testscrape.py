@@ -30,8 +30,9 @@ c=0
 def get_instagram_profile_info():
     # Create an instance of Instaloader
     L = instaloader.Instaloader()
-    try:
-        L.context.login("siriussnyder", "blackCut")
+    try:        
+        L.context.login("usrname", "passwd") # Use your password and username for instagram account
+
     except instaloader.exceptions.ConnectionException as e:
         print(f"Login Error:{e}")
     except instaloader.exceptions.BadCredentialsException:
